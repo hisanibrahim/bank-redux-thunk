@@ -1,6 +1,8 @@
 import React from "react";
-import Loading from "../components/Loading";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import Loading from "../components/Loading";
 import { getAccountBalance } from "../actions/accounts";
 
 class BalancePage extends React.Component {
@@ -26,6 +28,7 @@ class BalancePage extends React.Component {
             );
           })
         )}
+        <Link to="/add-beneficiary">Add Beneficiary</Link>
       </>
     );
   }
