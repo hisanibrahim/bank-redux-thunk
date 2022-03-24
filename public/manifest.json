@@ -1,6 +1,6 @@
 {
-  "short_name": "Tweets",
-  "name": "Tweets",
+  "short_name": "Bank",
+  "name": "Bank",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

@@ -1,4 +1,1 @@
-export const getTweets = (query) => ({
-  type: "GET_TWEETS",
-  query,
-});
+export const GET_ACCOUNT_BALANCE = "GET_ACCOUNT_BALANCE";

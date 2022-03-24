@@ -1,16 +1,10 @@
-import React from 'react';
-import SearchBox from '../containers/SearchBox';
-import TweetList from '../containers/TweetList'
-import Loading from '../containers/Loading'
-
+import React from "react";
+import BalancePage from "../containers/BalancePage";
 
 const App = () => (
-  <div>
-    <SearchBox />
-    <Loading />
-    <TweetList />
-  </div>
+  <>
+    <BalancePage />
+  </>
 );
-
 
 export default App;
