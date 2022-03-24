@@ -20,7 +20,9 @@ class BalancePage extends React.Component {
         ) : (
           this.props.accounts.accounts.map((account) => {
             return (
-              <h1>{`${account.accountType}: ${account.accountBalance}`}</h1>
+              <h1
+                key={account.accountType}
+              >{`${account.accountType}: ${account.accountBalance}`}</h1>
             );
           })
         )}
