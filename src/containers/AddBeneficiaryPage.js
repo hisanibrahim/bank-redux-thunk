@@ -16,7 +16,7 @@ class BalancePage extends React.Component {
       bankName: null,
       beneficiaryName: null,
       beneficiaryNickname: null,
-      transactionType: null,
+      beneficiaryType: null,
       submitSuccess: false,
     };
   }
@@ -36,8 +36,8 @@ class BalancePage extends React.Component {
   onBeneficiaryNicknameChange = (e) => {
     this.setState({ beneficiaryNickname: e.target.value });
   };
-  onTransactionTypeChange = (e) => {
-    this.setState({ transactionType: e.target.value });
+  onbeneficiaryTypeChange = (e) => {
+    this.setState({ beneficiaryType: e.target.value });
   };
 
   onSubmit = (e) => {
@@ -49,7 +49,7 @@ class BalancePage extends React.Component {
         bankName,
         beneficiaryName,
         beneficiaryNickname,
-        transactionType,
+        beneficiaryType,
       } = this.state;
       // this.setState({ errorMessage: "Something went wrong" });
       // throw new Error("Name required");
@@ -59,7 +59,7 @@ class BalancePage extends React.Component {
         bankName,
         beneficiaryName,
         beneficiaryNickname,
-        transactionType,
+        beneficiaryType,
       });
 
       this.setState({ submitSuccess: true });
@@ -117,8 +117,8 @@ class BalancePage extends React.Component {
           <>
             <Form.Group className="mb-3">
               <Form.Select
-                onChange={this.onTransactionTypeChange}
-                value={this.state.transactionType}
+                onChange={this.onbeneficiaryTypeChange}
+                value={this.state.beneficiaryType}
               >
                 <option selected disabled>
                   Type

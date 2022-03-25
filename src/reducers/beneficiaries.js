@@ -1,4 +1,4 @@
-import { CREATE_BENEFICIARY } from "../actions";
+import { CREATE_BENEFICIARY, GET_BENEFICIARIES } from "../actions";
 
 const INITIAL_STATE = {
   data: [],
@@ -12,6 +12,13 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         lastCreated: action.newBeneficiary,
+        loading: false,
+      };
+    }
+    case GET_BENEFICIARIES: {
+      return {
+        ...state,
+        data: action.beneficiaries,
         loading: false,
       };
     }

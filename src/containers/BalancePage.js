@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Loading from "../components/Loading";
 import { getAccountBalance } from "../actions/accounts";
+import { getBeneficiaries } from "../actions/beneficiaries";
 
 class BalancePage extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class BalancePage extends React.Component {
 
   componentDidMount() {
     this.props.getAccountBalance("1");
+    this.props.getBeneficiaries("1");
   }
 
   render() {
@@ -29,6 +31,8 @@ class BalancePage extends React.Component {
           })
         )}
         <Link to="/add-beneficiary">Add Beneficiary</Link>
+        <br />
+        <Link to="/create-transaction">Create Transaction</Link>
       </>
     );
   }
@@ -36,6 +40,7 @@ class BalancePage extends React.Component {
 
 const mapDispatchToProps = {
   getAccountBalance: getAccountBalance,
+  getBeneficiaries: getBeneficiaries,
 };
 const mapStateToProps = (state) => ({
   accounts: state.accounts,
