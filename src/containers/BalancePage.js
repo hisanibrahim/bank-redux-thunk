@@ -1,49 +1,37 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Loading from "../components/Loading";
 import { getAccountBalance } from "../actions/accounts";
 import { getBeneficiaries } from "../actions/beneficiaries";
 
-class BalancePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const BalancePage = (props) => {
+  const dispatch = useDispatch();
+  const accounts = useSelector((state) => state.accounts);
 
-  componentDidMount() {
-    this.props.getAccountBalance("1");
-    this.props.getBeneficiaries("1");
-  }
-
-  render() {
-    return (
-      <>
-        {this.props.accounts.loading ? (
-          <Loading />
-        ) : (
-          this.props.accounts.accounts.map((account) => {
-            return (
-              <h1
-                key={account.accountType}
-              >{`${account.accountType}: ${account.accountBalance}`}</h1>
-            );
-          })
-        )}
-        <Link to="/add-beneficiary">Add Beneficiary</Link>
-        <br />
-        <Link to="/create-transaction">Create Transaction</Link>
-      </>
-    );
-  }
-}
-
-const mapDispatchToProps = {
-  getAccountBalance: getAccountBalance,
-  getBeneficiaries: getBeneficiaries,
+  useEffect(() => {
+    dispatch(getAccountBalance("1"));
+    dispatch(getBeneficiaries("1"));
+  }, []);
+  return (
+    <>
+      {accounts.loading ? (
+        <Loading />
+      ) : (
+        accounts.accounts.map((account) => {
+          return (
+            <h1
+              key={account.accountType}
+            >{`${account.accountType}: ${account.accountBalance}`}</h1>
+          );
+        })
+      )}
+      <Link to="/add-beneficiary">Add Beneficiary</Link>
+      <br />
+      <Link to="/create-transaction">Create Transaction</Link>
+    </>
+  );
 };
-const mapStateToProps = (state) => ({
-  accounts: state.accounts,
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(BalancePage);
+export default BalancePage;
