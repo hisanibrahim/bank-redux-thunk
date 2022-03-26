@@ -11,7 +11,7 @@ class CreateTransactionPage extends React.Component {
     super(props);
     this.state = {
       errorMessage: "",
-      submitSuccess: "",
+      submitSuccess: false,
       beneficiary: "",
       beneficiaryTypes: {
         I: "Internal",

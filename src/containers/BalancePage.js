@@ -30,6 +30,8 @@ const BalancePage = (props) => {
       <Link to="/add-beneficiary">Add Beneficiary</Link>
       <br />
       <Link to="/create-transaction">Create Transaction</Link>
+      <br />
+      <Link to="/request-cheque-book">Request Chequebook</Link>
     </>
   );
 };
