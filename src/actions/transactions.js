@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_TRANSACTION, GET_TRANSACTIONS } from ".";
+import { CREATE_TRANSACTION, GET_TRANSACTIONS, TRANSACTIONS_RECEIVED } from ".";
 
 export const createTransaction = (transactionDetails) => async (dispatch) => {
   const response = await axios.post(`https://reqres.in/api/users`, {
@@ -23,6 +23,12 @@ export const createTransaction = (transactionDetails) => async (dispatch) => {
 };
 
 export const getTransactions = (filters) => async (dispatch) => {
+  dispatch({
+    type: GET_TRANSACTIONS,
+    loading: true,
+  });
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const response = await axios.get(
     `https://reqres.in/api/users?month=${filters.month}&year=${filters.year}&userId=1`
   );
@@ -43,7 +49,7 @@ export const getTransactions = (filters) => async (dispatch) => {
     },
   ];
   dispatch({
-    type: GET_TRANSACTIONS,
+    type: TRANSACTIONS_RECEIVED,
     transactions: transactions,
   });
 };

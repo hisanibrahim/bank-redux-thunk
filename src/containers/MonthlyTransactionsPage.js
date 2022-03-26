@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Form, Button, Table } from "react-bootstrap";
 
+import Loading from "../components/Loading";
 import { getTransactions } from "../actions/transactions";
 
 class MonthlyTransactionsPage extends React.Component {
@@ -50,32 +51,36 @@ class MonthlyTransactionsPage extends React.Component {
               Submit
             </Button>
           </Form.Group>
-          <Form.Group>
-            <Table striped bordered>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Transaction Type</th>
-                  <th>Transaction ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.props.transactions.data.map((t) => {
-                  return (
-                    <tr>
-                      <td>{t.trnDtTime}</td>
-                      <td>{t.trnDesc}</td>
-                      <td>{t.trnAmt}</td>
-                      <td>{t.trnType}</td>
-                      <td>{t.trnId}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </Form.Group>
+          {this.props.transactions.loading ? (
+            <Loading />
+          ) : (
+            <Form.Group>
+              <Table striped bordered>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Transaction Type</th>
+                    <th>Transaction ID</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.transactions.data.map((t) => {
+                    return (
+                      <tr>
+                        <td>{t.trnDtTime}</td>
+                        <td>{t.trnDesc}</td>
+                        <td>{t.trnAmt}</td>
+                        <td>{t.trnType}</td>
+                        <td>{t.trnId}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Form.Group>
+          )}
           <Form.Group>
             {this.state.errorMessage ? <p>{this.state.errorMessage} </p> : null}
           </Form.Group>
