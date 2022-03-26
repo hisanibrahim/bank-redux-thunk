@@ -36,11 +36,11 @@ class BalancePage extends React.Component {
   onBeneficiaryNicknameChange = (e) => {
     this.setState({ beneficiaryNickname: e.target.value });
   };
-  onbeneficiaryTypeChange = (e) => {
+  onBeneficiaryTypeChange = (e) => {
     this.setState({ beneficiaryType: e.target.value });
   };
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     try {
       e.preventDefault();
       const {
@@ -51,9 +51,13 @@ class BalancePage extends React.Component {
         beneficiaryNickname,
         beneficiaryType,
       } = this.state;
-      // this.setState({ errorMessage: "Something went wrong" });
-      // throw new Error("Name required");
-      this.props.createBeneficiary({
+
+      // if (accountNumber != 12) {
+      //   return this.setState({
+      //     errorMessage: "Account number must be 12 numbers",
+      //   });
+      // }
+      const response = await this.props.createBeneficiary({
         accountNumber,
         ifscCode,
         bankName,
@@ -62,7 +66,10 @@ class BalancePage extends React.Component {
         beneficiaryType,
       });
 
-      this.setState({ submitSuccess: true });
+      console.log(response);
+      if (response && response.status === "y") {
+        this.setState({ submitSuccess: true });
+      }
     } catch (error) {
       this.setState({ errorMessage: error.message });
     }
@@ -117,7 +124,7 @@ class BalancePage extends React.Component {
           <>
             <Form.Group className="mb-3">
               <Form.Select
-                onChange={this.onbeneficiaryTypeChange}
+                onChange={this.onBeneficiaryTypeChange}
                 value={this.state.beneficiaryType}
               >
                 <option selected disabled>
