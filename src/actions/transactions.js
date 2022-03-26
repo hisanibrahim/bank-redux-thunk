@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_TRANSACTION } from ".";
+import { CREATE_TRANSACTION, GET_TRANSACTIONS } from ".";
 
 export const createTransaction = (transactionDetails) => async (dispatch) => {
   const response = await axios.post(`https://reqres.in/api/users`, {
@@ -19,5 +19,31 @@ export const createTransaction = (transactionDetails) => async (dispatch) => {
   dispatch({
     type: CREATE_TRANSACTION,
     newTransaction,
+  });
+};
+
+export const getTransactions = (filters) => async (dispatch) => {
+  const response = await axios.get(
+    `https://reqres.in/api/users?month=${filters.month}&year=${filters.year}&userId=1`
+  );
+  const transactions = [
+    {
+      trnId: 12,
+      trnType: "DEBIT",
+      trnDesc: "TO TRANSFER :- Scholarship Amount/ Minnu Josy, A/c - 2",
+      trnAmt: 3000,
+      trnDtTime: "2022-03-17T01:47:58.283",
+    },
+    {
+      trnId: 10,
+      trnType: "DEBIT",
+      trnDesc: "TO TRANSFER :- Scholarship Amount/ Minnu Josy, A/c - 2",
+      trnAmt: 3000,
+      trnDtTime: "2022-03-17T01:46:54.983",
+    },
+  ];
+  dispatch({
+    type: GET_TRANSACTIONS,
+    transactions: transactions,
   });
 };

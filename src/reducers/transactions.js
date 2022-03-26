@@ -1,4 +1,4 @@
-import { CREATE_TRANSACTION } from "../actions";
+import { CREATE_TRANSACTION, GET_TRANSACTIONS } from "../actions";
 
 const INITIAL_STATE = {
   data: [],
@@ -12,6 +12,13 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         lastCreated: action.newTransaction,
+        loading: false,
+      };
+    }
+    case GET_TRANSACTIONS: {
+      return {
+        ...state,
+        data: action.transactions,
         loading: false,
       };
     }
