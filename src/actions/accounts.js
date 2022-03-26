@@ -19,8 +19,8 @@ import { GET_ACCOUNT_BALANCE } from ".";
 export const getAccountBalance = (userId) => async (dispatch) => {
   const response = await axios.get(`https://reqres.in/api/users`);
   const accounts = [
-    { accountId: 1, accountType: "Savings Account", accountBalance: 30173 },
-    { accountId: 2, accountType: "Term Deposit", accountBalance: 12173 },
+    { accountId: 1, accountType: "Savings Account", accountBalance: 40173 },
+    { accountId: 2, accountType: "Term Deposit", accountBalance: 22173 },
   ];
   dispatch({
     type: GET_ACCOUNT_BALANCE,

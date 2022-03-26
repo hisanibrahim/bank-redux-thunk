@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
-import Loading from "../components/Loading";
-import { createBeneficiary, getBeneficiaries } from "../actions/beneficiaries";
+import { getBeneficiaries } from "../actions/beneficiaries";
+import { createTransaction } from "../actions/transactions";
 
 class CreateTransactionPage extends React.Component {
   constructor(props) {
@@ -55,22 +55,21 @@ class CreateTransactionPage extends React.Component {
     try {
       e.preventDefault();
       const {
-        accountNumber,
-        ifscCode,
-        bankName,
-        beneficiaryName,
-        beneficiaryNickname,
-        beneficiaryType,
+        selectedBeneficiary: {
+          accountNumber,
+          beneficiaryName,
+          beneficiaryType,
+        },
+        amount,
+        description,
       } = this.state;
-      // this.setState({ errorMessage: "Something went wrong" });
-      // throw new Error("Name required");
-      this.props.createBeneficiary({
+
+      this.props.createTransaction({
         accountNumber,
-        ifscCode,
-        bankName,
         beneficiaryName,
-        beneficiaryNickname,
         beneficiaryType,
+        amount,
+        description,
       });
 
       this.setState({ submitSuccess: true });
@@ -152,6 +151,22 @@ class CreateTransactionPage extends React.Component {
               }
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Control
+              placeholder="Amount"
+              type="number"
+              value={this.state.amount}
+              onChange={this.onAmountChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Control
+              placeholder="Description"
+              type="text"
+              value={this.state.description}
+              onChange={this.onDescriptionChange}
+            />
+          </Form.Group>
           <br />
           <Button variant="primary" type="submit" onClick={this.onSubmit}>
             Submit
@@ -164,7 +179,7 @@ class CreateTransactionPage extends React.Component {
 }
 
 const mapDispatchToProps = {
-  createBeneficiary: createBeneficiary,
+  createTransaction: createTransaction,
   getBeneficiaries: getBeneficiaries,
 };
 
