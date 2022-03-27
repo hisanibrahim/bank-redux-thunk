@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 
 import Loading from "../components/Loading";
 import { createBeneficiary } from "../actions/beneficiaries";
 
-class BalancePage extends React.Component {
+class AddBeneficiaryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -128,7 +128,7 @@ class BalancePage extends React.Component {
                 value={this.state.beneficiaryType}
               >
                 <option selected disabled>
-                  Type
+                  Beneficiary Type
                 </option>
                 <option value="I">Internal</option>
                 <option value="E">External</option>
@@ -150,7 +150,7 @@ const mapDispatchToProps = {
   createBeneficiary: createBeneficiary,
 };
 const mapStateToProps = (state) => ({
-  lastCreated: state.lastCreated,
+  beneficiaries: state.beneficiaries,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BalancePage);
+export default connect(mapStateToProps, mapDispatchToProps)(AddBeneficiaryPage);

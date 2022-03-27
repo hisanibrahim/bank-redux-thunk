@@ -12,11 +12,11 @@ class CreateTransactionPage extends React.Component {
     this.state = {
       errorMessage: "",
       submitSuccess: false,
-      beneficiary: "",
       beneficiaryTypes: {
         I: "Internal",
         E: "External",
       },
+      beneficiary: "",
       selectedBeneficiary: {
         accountNumber: "",
         ifscCode: "",
