@@ -15,7 +15,7 @@ export const createBeneficiary = (beneficiaryDetails) => async (dispatch) => {
       ownerId: 0,
     });
     response = {
-      status: "n",
+      status: "y",
       message: "error message",
     };
     if (response && response.status === "y") {

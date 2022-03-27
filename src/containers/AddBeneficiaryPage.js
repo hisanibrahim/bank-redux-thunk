@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Alert, Toast } from "react-bootstrap";
 
 import Loading from "../components/Loading";
 import { createBeneficiary } from "../actions/beneficiaries";
@@ -79,9 +79,25 @@ class AddBeneficiaryPage extends React.Component {
 
   render() {
     return (
-      <>
-        <h1>Add Beneficiary</h1>
-        {this.state.submitSuccess && <Navigate to="/" replace={true} />}
+      <Container>
+        <br />
+        <h3>Add Beneficiary</h3>
+        <p>
+          Morbi dictum ullamcorper urna in aliquet. Nulla at massa mattis,
+          mollis mi nec, fermentum quam.
+        </p>
+        {this.state.submitSuccess ? (
+          <>
+            {/* <Toast show={this.state.submitSuccess}>
+              <Toast.Header>
+                <strong className="me-auto">Success</strong>
+              </Toast.Header>
+              <Toast.Body>Hey, Beneficiary added successfully.</Toast.Body>
+            </Toast> */}
+            <Navigate to="/" replace={true} />
+          </>
+        ) : null}
+        <br />
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
@@ -142,11 +158,20 @@ class AddBeneficiaryPage extends React.Component {
           </Form.Group>
           <Form.Group>
             {this.state.errorMessage ? (
-              <Form.Label>{this.state.errorMessage}</Form.Label>
+              <>
+                <br />
+                <Alert variant="danger">
+                  <h5>{this.state.errorMessage}</h5>
+                  <p>
+                    Morbi dictum ullamcorper urna in aliquet. Nulla at massa
+                    mattis, mollis mi nec, fermentum quam.
+                  </p>
+                </Alert>
+              </>
             ) : null}
           </Form.Group>
         </Form>
-      </>
+      </Container>
     );
   }
 }

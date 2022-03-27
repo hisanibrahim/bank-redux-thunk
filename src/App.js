@@ -13,9 +13,9 @@ const App = () => (
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand>
-          {/* <Link style={{ textDecoration: "none" }} to="/"> */}
-          Swiss Bank
-          {/* </Link> */}
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+            Swiss Bank
+          </Link>
         </Navbar.Brand>
       </Container>
     </Navbar>

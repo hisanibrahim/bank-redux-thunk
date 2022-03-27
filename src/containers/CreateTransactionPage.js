@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Alert } from "react-bootstrap";
 
 import { getBeneficiaries } from "../actions/beneficiaries";
 import { createTransaction } from "../actions/transactions";
@@ -85,9 +85,15 @@ class CreateTransactionPage extends React.Component {
 
   render() {
     return (
-      <>
-        <h1>Create Transaction</h1>
+      <Container>
         {this.state.submitSuccess && <Navigate to="/" replace={true} />}
+        <br />
+        <h3>Create Transaction</h3>
+        <p>
+          Morbi dictum ullamcorper urna in aliquet. Nulla at massa mattis,
+          mollis mi nec, fermentum quam.
+        </p>
+        <br />
         <Form>
           <Form.Group className="mb-3">
             <Form.Select
@@ -179,11 +185,20 @@ class CreateTransactionPage extends React.Component {
           </Form.Group>
           <Form.Group>
             {this.state.errorMessage ? (
-              <Form.Label>{this.state.errorMessage}</Form.Label>
+              <>
+                <br />
+                <Alert variant="danger">
+                  <h5>{this.state.errorMessage}</h5>
+                  <p>
+                    Morbi dictum ullamcorper urna in aliquet. Nulla at massa
+                    mattis, mollis mi nec, fermentum quam.
+                  </p>
+                </Alert>
+              </>
             ) : null}
           </Form.Group>
         </Form>
-      </>
+      </Container>
     );
   }
 }

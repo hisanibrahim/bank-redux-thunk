@@ -101,14 +101,6 @@ const BalancePage = (props) => {
           </Card>
         </Col>
       </Row>
-      {/* 
-      <Link to="/add-beneficiary">Add Beneficiary</Link>
-      <br />
-      <Link to="/create-transaction">Create Transaction</Link>
-      <br />
-      <Link to="/request-cheque-book">Request Cheque Book</Link>
-      <br />
-      <Link to="/monthly-transactions">Monthly Transactions</Link> */}
     </Container>
   );
 };

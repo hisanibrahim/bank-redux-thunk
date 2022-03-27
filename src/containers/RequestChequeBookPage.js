@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Form, Button, Table } from "react-bootstrap";
+import { Form, Button, Table, Container, Alert } from "react-bootstrap";
 
 import { requestChequeBook } from "../actions/chequeBooks";
 
@@ -58,9 +58,15 @@ class RequestChequeBookPage extends React.Component {
 
   render() {
     return (
-      <>
-        <h1>Request Cheque Book</h1>
+      <Container>
         {this.state.submitSuccess && <Navigate to="/" replace={true} />}
+        <br />
+        <h3>Request Cheque Book</h3>
+        <p>
+          Morbi dictum ullamcorper urna in aliquet. Nulla at massa mattis,
+          mollis mi nec, fermentum quam.
+        </p>
+        <br />
         <Form>
           <Table striped bordered>
             <thead>
@@ -100,12 +106,27 @@ class RequestChequeBookPage extends React.Component {
               ))}
             </Form.Select>
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Submit
-          </Button>
-          {this.state.errorMessage ? <p>{this.state.errorMessage} </p> : null}
+          <Form.Group>
+            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+              Submit
+            </Button>
+          </Form.Group>
+          <Form.Group>
+            {this.state.errorMessage ? (
+              <>
+                <br />
+                <Alert variant="danger">
+                  <h5>{this.state.errorMessage}</h5>
+                  <p>
+                    Morbi dictum ullamcorper urna in aliquet. Nulla at massa
+                    mattis, mollis mi nec, fermentum quam.
+                  </p>
+                </Alert>
+              </>
+            ) : null}
+          </Form.Group>
         </Form>
-      </>
+      </Container>
     );
   }
 }

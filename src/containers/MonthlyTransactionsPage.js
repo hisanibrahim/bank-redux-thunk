@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Button, Table } from "react-bootstrap";
+import { Form, Button, Table, Container } from "react-bootstrap";
 
 import Loading from "../components/Loading";
 import { getTransactions } from "../actions/transactions";
@@ -36,8 +36,14 @@ class MonthlyTransactionsPage extends React.Component {
 
   render() {
     return (
-      <>
-        <h1>Monthly Transactions</h1>
+      <Container>
+        <br />
+        <h3>Monthly Transactions</h3>
+        <p>
+          Morbi dictum ullamcorper urna in aliquet. Nulla at massa mattis,
+          mollis mi nec, fermentum quam.
+        </p>
+        <br />
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
@@ -52,9 +58,10 @@ class MonthlyTransactionsPage extends React.Component {
               Submit
             </Button>
           </Form.Group>
+          <br />
           {this.props.transactions.loading ? (
             <Loading />
-          ) : (
+          ) : this.props.transactions.data.length > 0 ? (
             <Form.Group>
               <Table striped bordered>
                 <thead>
@@ -81,12 +88,16 @@ class MonthlyTransactionsPage extends React.Component {
                 </tbody>
               </Table>
             </Form.Group>
+          ) : (
+            <Form.Group>
+              <p>No transactions found. Select another month and try again.</p>
+            </Form.Group>
           )}
           <Form.Group>
             {this.state.errorMessage ? <p>{this.state.errorMessage} </p> : null}
           </Form.Group>
         </Form>
-      </>
+      </Container>
     );
   }
 }
