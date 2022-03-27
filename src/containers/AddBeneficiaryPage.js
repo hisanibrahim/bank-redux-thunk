@@ -10,13 +10,13 @@ class AddBeneficiaryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: null,
-      accountNumber: null,
-      ifscCode: null,
-      bankName: null,
-      beneficiaryName: null,
-      beneficiaryNickname: null,
-      beneficiaryType: null,
+      errorMessage: "",
+      accountNumber: "",
+      ifscCode: "",
+      bankName: "",
+      beneficiaryName: "",
+      beneficiaryNickname: "",
+      beneficiaryType: "",
       submitSuccess: false,
     };
   }
@@ -52,11 +52,24 @@ class AddBeneficiaryPage extends React.Component {
         beneficiaryType,
       } = this.state;
 
-      // if (accountNumber != 12) {
-      //   return this.setState({
-      //     errorMessage: "Account number must be 12 numbers",
-      //   });
-      // }
+      if (
+        !accountNumber ||
+        !ifscCode ||
+        !bankName ||
+        !beneficiaryName ||
+        !beneficiaryNickname ||
+        !beneficiaryType
+      ) {
+        return this.setState({
+          errorMessage: "All fields are required",
+        });
+      }
+
+      if (accountNumber.length != 13) {
+        return this.setState({
+          errorMessage: "Account number must be 13 numbers",
+        });
+      }
       const response = await this.props.createBeneficiary({
         accountNumber,
         ifscCode,
@@ -134,6 +147,7 @@ class AddBeneficiaryPage extends React.Component {
           <Form.Group className="mb-3">
             <Form.Control
               placeholder="Nickname"
+              required
               type="text"
               value={this.state.beneficiaryNickname}
               onChange={this.onBeneficiaryNicknameChange}
@@ -144,7 +158,7 @@ class AddBeneficiaryPage extends React.Component {
               onChange={this.onBeneficiaryTypeChange}
               value={this.state.beneficiaryType}
             >
-              <option selected disabled>
+              <option value="" selected disabled>
                 Beneficiary Type
               </option>
               <option value="I">Internal</option>
