@@ -10,7 +10,7 @@ class MonthlyTransactionsPage extends React.Component {
     super(props);
     this.state = {
       errorMessage: "",
-      monthYear: "",
+      monthYear: "2022-03",
     };
   }
 
@@ -43,6 +43,7 @@ class MonthlyTransactionsPage extends React.Component {
             <Form.Control
               placeholder="Select month"
               type="month"
+              value={this.state.monthYear}
               onChange={this.onMonthYearChange}
             />
           </Form.Group>

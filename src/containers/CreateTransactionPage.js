@@ -51,7 +51,7 @@ class CreateTransactionPage extends React.Component {
     this.setState({ description: e.target.value });
   };
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     try {
       e.preventDefault();
       const {
@@ -64,7 +64,7 @@ class CreateTransactionPage extends React.Component {
         description,
       } = this.state;
 
-      this.props.createTransaction({
+      const response = await this.props.createTransaction({
         accountNumber,
         beneficiaryName,
         beneficiaryType,
@@ -72,7 +72,12 @@ class CreateTransactionPage extends React.Component {
         description,
       });
 
-      this.setState({ submitSuccess: true });
+      if (response && response.status === "y") {
+        this.setState({ submitSuccess: true });
+      }
+      if (response && response.status === "n") {
+        this.setState({ submitSuccess: false, errorMessage: response.message });
+      }
     } catch (error) {
       this.setState({ errorMessage: error.message });
     }
@@ -93,7 +98,7 @@ class CreateTransactionPage extends React.Component {
                 Select beneficiary
               </option>
               {this.props.beneficiaries.data.map((b) => (
-                <option key={toString(b.accountNumber)} value={b.accountNumber}>
+                <option key={b.accountNumber} value={b.accountNumber}>
                   {b.beneficiaryName}
                 </option>
               ))}
@@ -167,11 +172,16 @@ class CreateTransactionPage extends React.Component {
               onChange={this.onDescriptionChange}
             />
           </Form.Group>
-          <br />
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Submit
-          </Button>
-          {this.state.errorMessage ? <p>{this.state.errorMessage} </p> : null}
+          <Form.Group>
+            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+              Submit
+            </Button>
+          </Form.Group>
+          <Form.Group>
+            {this.state.errorMessage ? (
+              <Form.Label>{this.state.errorMessage}</Form.Label>
+            ) : null}
+          </Form.Group>
         </Form>
       </>
     );

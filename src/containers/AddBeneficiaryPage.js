@@ -66,9 +66,11 @@ class AddBeneficiaryPage extends React.Component {
         beneficiaryType,
       });
 
-      console.log(response);
       if (response && response.status === "y") {
         this.setState({ submitSuccess: true });
+      }
+      if (response && response.status === "n") {
+        this.setState({ submitSuccess: false, errorMessage: response.message });
       }
     } catch (error) {
       this.setState({ errorMessage: error.message });
@@ -121,25 +123,28 @@ class AddBeneficiaryPage extends React.Component {
               onChange={this.onBeneficiaryNicknameChange}
             />
           </Form.Group>
-          <>
-            <Form.Group className="mb-3">
-              <Form.Select
-                onChange={this.onBeneficiaryTypeChange}
-                value={this.state.beneficiaryType}
-              >
-                <option selected disabled>
-                  Beneficiary Type
-                </option>
-                <option value="I">Internal</option>
-                <option value="E">External</option>
-              </Form.Select>
-            </Form.Group>
-          </>
-          <br />
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Submit
-          </Button>
-          {this.state.errorMessage ? <p>{this.state.errorMessage} </p> : null}
+          <Form.Group className="mb-3">
+            <Form.Select
+              onChange={this.onBeneficiaryTypeChange}
+              value={this.state.beneficiaryType}
+            >
+              <option selected disabled>
+                Beneficiary Type
+              </option>
+              <option value="I">Internal</option>
+              <option value="E">External</option>
+            </Form.Select>
+          </Form.Group>
+          <Form.Group>
+            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+              Submit
+            </Button>
+          </Form.Group>
+          <Form.Group>
+            {this.state.errorMessage ? (
+              <Form.Label>{this.state.errorMessage}</Form.Label>
+            ) : null}
+          </Form.Group>
         </Form>
       </>
     );

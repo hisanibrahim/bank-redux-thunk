@@ -36,16 +36,21 @@ class RequestChequeBookPage extends React.Component {
     });
   };
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     try {
       e.preventDefault();
       const { amount } = this.state;
 
-      this.props.requestChequeBook({
+      const response = await this.props.requestChequeBook({
         amount,
       });
 
-      this.setState({ submitSuccess: true });
+      if (response && response.status === "y") {
+        this.setState({ submitSuccess: true });
+      }
+      if (response && response.status === "n") {
+        this.setState({ submitSuccess: false, errorMessage: response.message });
+      }
     } catch (error) {
       this.setState({ errorMessage: error.message });
     }
