@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Clone this project
+
+### Create a `.env` file in the root of the project
+
+```.env
+REACT_APP_SERVER_URL="http://localhost:4000"
+```
+
+### `npm install`
 
 ## Available Scripts
 
